@@ -1,3 +1,6 @@
+#include<vector>
+using namespace std;
+
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
@@ -12,21 +15,19 @@ public:
         if (nums[mid] == target) {
             return mid;
         }
-        if (nums[mid] > target) {
-            int flg = bSearch(nums, b, mid - 1, target);
-            if (flg != -1) return flg;
-            if (target <= nums[e]) {
-                flg = bSearch(nums, mid + 1, e, target);
-                if (flg != -1) return flg;
-            }
-        } else {
-            int flg = bSearch(nums, mid + 1, e, target);
-            if (flg != -1) return flg;
-            if (target >= nums[b]) {
-                flg = bSearch(nums, b, mid - 1, target);
-                if (flg != -1) return flg;
-            }
-        }
+	if (nums[mid] >= nums[b]) {
+	  if (target >= nums[b] && target < nums[mid]) {
+	    return bSearch(nums, b, mid - 1, target);
+	  } else {
+	    return bSearch(nums, mid + 1, e, target);
+	  }
+	} else {
+	  if (target > nums[mid] && target <= nums[e]) {
+	    return bSearch(nums, mid + 1, e , target);
+	  } else {
+	    return bSearch(nums, b, mid - 1, target);
+	  }
+	}
         
         return -1;
     }
