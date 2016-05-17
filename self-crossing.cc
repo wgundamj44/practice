@@ -1,6 +1,6 @@
 class Solution {
 public:
-  //check
+  //check: 3 patterns
   bool isSelfCrossing(vector<int>& x) {
     for(int i = 0; i < x.size(); i++) {
       if (i >= 3) {
