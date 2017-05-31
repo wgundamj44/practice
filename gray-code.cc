@@ -6,6 +6,7 @@ using namespace std;
 
 class Solution {
 public:
+  //check
   vector<int> grayCode(int n) {
     if (n == 0) return {0};
     auto ret = grayCode(n - 1);

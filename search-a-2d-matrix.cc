@@ -1,5 +1,6 @@
 class Solution {
 public:
+  //check: use start index or end index when binary search quit
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         int h = matrix.size();
         if (h == 0) return false;

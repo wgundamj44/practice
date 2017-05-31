@@ -48,3 +48,46 @@ public:
         return ret;
     }
 };
+
+
+class Solution2 {
+  //check: another solution
+public:
+  string minWindow(string s, string t) {
+    unordered_map<char, int> m;
+    unordered_map<char, int> targets;
+    queue<int> q;
+    for(char c: t) {
+      m[c] = 0;
+      if (targets.find(c) == targets.end()) targets[c] = 1;
+      else targets[c]++;
+    }
+    int b = 0, e = -1;
+    int found = 0;
+    string res = "";
+    for(int i = 0; i < s.length(); i++) {
+      if (targets.find(s[i]) != targets.end()) {
+        m[s[i]]++;
+        if (m[s[i]] <= targets[s[i]]) found++;
+        if (q.empty()) {
+          q.push(i);
+          b = i;
+        } else {
+          q.push(i);
+          auto top = q.front();
+          while(m[s[top]] > targets[s[top]]) {
+            q.pop();
+            m[s[top]]--;
+            top = q.front();
+            b = top;
+          }
+        }
+        if (found == t.length()) {
+          e = i;
+          if (res == "" || e - b + 1 < res.length()) res = s.substr(b, e -b + 1);
+        }
+      }
+    }
+    return res;
+  }
+};

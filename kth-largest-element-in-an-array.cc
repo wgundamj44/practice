@@ -1,3 +1,8 @@
+#include<vector>
+#include<algorithm>
+#include<iostream>
+using namespace std;
+
 class Solution {
 public:
   //check
@@ -40,4 +45,34 @@ public:
     }
   }
 
+  int findKth(vector<int> nums, int k) {
+    int b = 0, e = nums.size() - 1;
+    int m = b + (e - b) / 2;
+    int k1 = k;
+    swap(nums[0], nums[m]);
+    while(true) {
+      int i = b + 1;
+      for(int j = i; j <= e; j++) {
+        if (nums[j] >= nums[b]) {
+          swap(nums[j], nums[i]);
+          i++;
+        }
+      }
+      swap(nums[i-1], nums[b]);
+      if (i - b == k1) return nums[i-1];
+      else if (i - b > k1) {
+        e = i - 2;
+      } else {
+        k1 = k1 - i;
+        b = i;
+      }
+    }
+  }
 };
+
+
+int main() {
+  vector<int> vs = {1};
+  Solution s;
+  cout << s.findKth(vs, 1) << endl;
+}
